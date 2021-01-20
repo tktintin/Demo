@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <title>Mashup</title>
+    </head>
+    
+    <body class = "bg-light">
+        <!-- Everything goes here -->
+
+        <div id = display>
+
+            <form id = news-article>
+                
+                <!-- Header -->
+                <div id="title-container" style="width:75%; float:left">
+                    <h1 class="my-0 text-right display-4 text-dark">Seisms</h1>
+                    <h5 id="reminder" class="text-right">[An Earthquake Report]</h5>
+                </div>
+
+                <!-- license to -->
+                <div id = "licensedTo" style="width:25%; float:left">
+                    <p>Map API</p>
+                    <p>USGS API</p>
+                    <p>News API</p>
+                </div>
+
+                <div id = userInput>
+
+                    <!-- Field: Enter a city, area, country -->
+                    <div id = textInput class="form-group mb-2">
+                        <input type="text" class="form-control mb-2" id="inputArticle" placeholder="Enter a country" required>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div id = "buttons" class="form-group">
+                        <button type="button" onclick="getInfo(), updatePositionByCountry()" class="btn btn-outline-dark mt-8">Get Info</button>
+                        <button type="button" onclick="saveArticle(), saveCoordinates()" class="btn btn-outline-dark mt-8">Save</button>
+                        <button type="button" onclick="clearEverything()" class="btn btn-outline-dark mt-8">Clear</button>
+                    </div>
+                
+                </div>
+
+                <div id=errorMessage class="container" ><!-- error message goes here --></div>
+                <div id=output-container class="container" ><!-- result goes here --></div>
+            
+            </form>
+        
+            <div id="map">
+                <img src=extra/loading.gif>
+            </div>
+
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=PRIVATE"></script>
+        <!-- <script src="js/jquery.slim.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <!-- <script src="js/popper.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+        <!-- <script src="js/bootstrap.min.js"></script> -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="js/model.js"></script>
+        <script src="js/view.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/coordinates.js"></script>
+
+    </body>
+
+</html>
+

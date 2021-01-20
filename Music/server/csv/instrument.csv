@@ -1,0 +1,21 @@
+Instrument,Category,Quantity,Price,Monthly Rental Fee
+Violin,String,20,1250,25
+Viola,String,18,1500,35
+Cello,String,12,1000,30
+Double Bass,String,0,900,20
+Guitar,String,30,190,15
+Harp,String,1,5000,75
+Flute,Woodwind,9,1000,15
+Oboe,Woodwind,4,750,25
+Clarinet,Woodwind,16,1700,35
+Bassoon,Woodwind,2,650,30
+Saxophone,Woodwind,1,1150,45
+Trumpet,Brass,10,175,15
+French Horn,Brass,7,1000,30
+Trombone,Brass,14,1000,20
+Tuba,Brass,10,850,20
+Marimba,Percussion,2,2300,40
+Drum,Percussion,0,800,25
+Bongo,Percussion,9,1000,30
+Bells,Percussion,19,1800,35
+Piano,Keyboard,5,7000,100

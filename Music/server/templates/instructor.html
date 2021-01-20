@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    </div>
+        <!-- Display Table -->
+        <table id="instructor" class="table table-bordered hover">
+
+            <thead class = thead-light>
+                <th>Instructor Name</th>
+                <th>Email</th>
+                <th>Instrument</th>
+                <th>Availability</th>
+                <th>Lesson Fee</th>
+            </thead>
+
+            <tbody>
+                <!-- instruments and their details go here -->
+                {% for s in instruct %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.email }}</td>
+                    <td>{{ s.instrument }}</td>
+                    <td>{{ s.availability }}</td>
+                    <td>{{ s.lessonFee }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+
+    <!-- Jquery -->
+    <script>
+        $(document).ready(function () {
+            $("#instructor").DataTable();
+        });
+    </script>
+
+{% endblock %}

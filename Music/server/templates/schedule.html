@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form action="/schedule" method="POST">
+
+        <div class="row">
+
+            <!-- Student Name -->
+            <div class="form-group col-3 mt-2">
+                <input type="text" name = name placeholder="Student Name" class="form-control" {% if selected.name %} value = {{ selected.name }} {% endif %} required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group col-3 mt-2">
+                <input type="text" name = email placeholder="Email" class="form-control" {% if selected.email %} value = {{ selected.email }} {% endif %} required>
+            </div>
+
+            <!-- Instrument -->
+            <div class="form-group col-3 mt-2">
+                <select name = instrument class="form-control custom-select dropdown-toggle" required>
+                    {% for x in instrumentLst %}
+                    <option value="{{x}}" {% if x == selected.instrument %} selected {% endif %} >{{x}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Find Lesson -->
+            <div class="col-3 mt-2">
+                <button type="submit" name = "submit" value = "Find Lesson" class="btn btn-outline-primary btn-block mb-3">Find Lesson</button>
+            </div>
+        
+        </div>
+
+        <div class="row">
+
+            <!-- Instructor -->
+            <div class="form-group col-3 mb-2">
+                <select name = instructor class="form-control custom-select dropdown-toggle"} {% if activateRequired == True %} required {% endif %}>
+                    {% for x in instructorLst %}
+                    <option value="{{x}}" {% if x == selected %} selected {% endif %}>{{x}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group col-3 mb-2">
+                <select name = status class="form-control custom-select dropdown-toggle" {% if activateRequired == True %} required {% endif %}>
+                    {% for x in ["Rental", "Purchase", "Personal"] %}
+                    <option value="{{x}}" {% if x == selected.status %} selected {% endif %}>{{x}}</option>
+                    {% endfor %}
+                </select>            
+            </div>
+
+            <!-- Level -->
+            <div class="form-group col-3 mb-2">
+                <select name = level class="form-control custom-select dropdown-toggle" {% if activateRequired == True %} required {% endif %}>
+                    {% for x in ["Beginner", "Intermediate", "Advance", "Not Sure"] %}
+                    <option value="{{x}}" {% if x == selected.level %} selected {% endif %} >{{x}}</option>
+                    {% endfor %}
+                </select>  
+            </div>
+
+            <!-- Confirm -->
+            <div class="col-3 mb-2">
+                <button type="submit" name = "submit" value = "Confirm" class="btn btn-outline-primary btn-block mb-3">Confirm</button>
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <!-- ************************************************************************************ -->
+
+    {% if availableInstructor == False %}
+
+        <p class = alert-danger>Sorry, we don't offer lessons for your selected instrument.</p>
+
+    {% elif availableInstructor == True %}
+
+        <p class = alert-success>Here are the available instructor(s) for your selected instrument.</p>
+
+        </div>
+        <!-- Display Table -->
+        <table id="instrument" class="table table-bordered hover">
+
+            <thead class = thead-light>
+                <th>Instructor Name</th>
+                <th>Email</th>
+                <th>Instrument</th>
+                <th>Availability</th>
+                <th>Lesson Fee</th>
+            </thead>
+
+            <tbody>
+                <!-- instruments and their details go here -->
+                {% for s in findInstructor %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.email }}</td>
+                    <td>{{ s.instrument }}</td>
+                    <td>{{ s.availability }}</td>
+                    <td>{{ s.lessonFee }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+        </div>
+
+        <!-- Jquery -->
+        <script>
+        $(document).ready(function () {
+            $("#instrument").DataTable();
+        });
+        </script>
+
+    {% endif %}
+
+<!-- ************************************************************************************ -->
+
+    {% if error == True %}
+
+    <p class = alert-danger>Sorry, each client can only schedule one lesson per month. Here's your current lesson information.</p>
+
+    {% elif error == False %}
+
+    <p class = alert-success>Lesson successfully added.</p>
+
+    {% endif %}
+
+<!-- ************************************************************************************ -->
+
+    {% if availabilityError == True %}
+
+    <p class = alert-danger>Sorry, the instrument selected is currently not available for purchase or rental.</p>
+
+    {% endif %}
+
+<!-- ************************************************************************************ -->
+
+    {% if table == True %}
+
+    <!-- Add New Music Lesson Table -->
+
+        </div>
+        <!-- Display Table -->
+            <table id="MusicLesson" class="table table-bordered hover">
+
+                <thead class = thead-light>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Instructor</th>
+                    <th>Instrument</th>
+                    <th>Instrument</th>
+                    <th>Level</th>
+                    <th>Amount Due</th>
+                </thead>
+
+                <tbody>
+                    <!-- instruments and their details go here -->
+                    {% for s in musiclesson %}
+                    <tr>
+                        <td>{{ s.name }}</td>
+                        <td>{{ s.email }}</td>
+                        <td>{{ s.instructor }}</td>
+                        <td>{{ s.instrument }}</td>
+                        <td>{{ s.status }}</td>
+                        <td>{{ s.level }}</td>
+                        <td>{{ s.balance }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+
+        <!-- Jquery -->
+        <script>
+        $(document).ready(function () {
+            $("#MusicLesson").DataTable();
+        });
+        </script>
+
+    {% endif %}
+
+{% endblock %}
+

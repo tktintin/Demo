@@ -1,0 +1,48 @@
+#map {
+  width: 75%; 
+  height: 850px;
+  float: right;
+}
+
+.custom-border {
+    border:2.5px #b1aeb0 dashed;
+    margin-bottom: 4%;
+    padding: 2%;
+}
+
+.form-group {
+    width: 90%;
+}
+
+.form-group {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#title-container {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#licensedTo {
+    padding-top: 20px;
+}
+
+#licensedTo p {
+    margin: 0 auto;
+    font-weight: lighter;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    width: 18%;
+    float: left;
+}
+
+#news-article {
+    width: 25%; 
+    height: 850px; 
+    overflow: scroll; 
+    float: left;
+}

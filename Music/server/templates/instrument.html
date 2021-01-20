@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <!-- Update Database Field -->
+        <div>
+            <!-- Form: Add / Remove -->
+
+            <form action="/instrument" method="POST">
+
+                <div class="row">
+        
+                    <!-- Dropdown: Instrument -->
+                    <div class="col-6 mt-2">
+                        <select name = instrument class="form-control custom-select dropdown-toggle" required>
+                            {% for x in instrumentLst %}
+                            <option value="{{x}}" {% if x == selected %} selected {% endif %}>{{x}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+        
+                    <!-- Button: Add -->
+                    <div class="col-3 mt-2">
+                        <input type="submit" name="submit" value="Add" class = "btn btn-outline-info btn-block mb-3">
+                    </div>
+        
+                    <!-- Button: Remove -->
+                    <div class="col-3 mt-2">
+                        <input type="submit" name="submit" value="Remove" class = "btn btn-outline-info btn-block mb-3">
+                    </div>
+        
+                </div>
+            
+            </form>
+
+            {% if error == True %}
+
+                <p class="alert-danger">You don't have any such instrument in stock right now, update is unsuccessful.</p>
+
+            {% endif %}
+            
+            <!-- Display Table -->
+            <table id="instrument" class="table table-bordered hover">
+
+                <thead class = thead-light>
+                    <th>Instrument</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Rental Fee</th>
+                </thead>
+
+                <tbody>
+                    <!-- instruments and their details go here -->
+                    {% for s in instru %}
+                    <tr>
+                        <td>{{ s.instrument }}</td>
+                        <td>{{ s.category }}</td>
+                        <td>{{ s.quantity }}</td>
+                        <td>{{ s.price }}</td>
+                        <td>{{ s.rentalFee }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+
+        <!-- Jquery -->
+        <script>
+            $(document).ready(function () {
+                $("#instrument").DataTable();
+            });
+        </script>
+        
+{% endblock %}

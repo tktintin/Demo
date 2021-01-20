@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form action="/musiclesson" method="POST">
+
+        <div class="row">
+
+            <!-- Student Name -->
+            <div class="form-group col-3 mt-2">
+                <!-- {{studentLst}} -->
+                <select name = name class="form-control custom-select dropdown-toggle" required>
+                    {% for x in studentLst %}
+                    <option value="{{x}}" {% if x == selected %} selected {% endif %}>{{x}}</option>
+                    {% endfor %}
+                </select>            
+            </div>
+
+            <!-- Make a payment -->
+            <div class="form-group col-3 mt-2">
+                <input type="text" name = payment value = 0.0 placeholder="Payment" class="form-control" required>
+            </div>
+
+            <!-- Submit -->
+            <div class="col-3 mt-2">
+                <button type="submit" name = submit value = "Make Payment" class="btn btn-outline-primary btn-block mb-3">Make Payment</button>
+            </div>
+
+            <!-- Cancel Lesson -->
+            <div class="col-3 mt-2">
+                <button type="submit" name = submit value = "Cancel Lesson" class="btn btn-outline-primary btn-block mb-3">Cancel Lesson</button>
+            </div>
+
+        </div>
+
+    </form>
+
+    {% if paymentError == None %}
+
+    {% elif paymentError == True %}
+
+        <p class="alert-danger">The proposed payment is more than current balance. Please adjust to a smaller amount.</p>
+
+    {% elif paymentError == False %}
+
+        <p class="alert-success">Payment is successful.</p>
+
+    {% endif %}
+
+
+    {% if cancelError == True %}
+
+        <p class="alert-danger">Make sure the client pay their balance before cancelling lesson.</p>
+
+    {% elif cancelError == False %}
+
+        <p class="alert-success">Lesson cancellation is successful.</p>
+
+    {% endif %}
+
+    </div>
+    <!-- Display Table -->
+    <table id="MusicLesson" class="table table-bordered hover">
+
+        <thead class = thead-light>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Instructor</th>
+            <th>Instrument</th>
+            <th>Instrument Status</th>
+            <th>Level</th>
+            <th>Amount Due</th>
+        </thead>
+
+        <tbody>
+            <!-- instruments and their details go here -->
+            {% for s in musiclesson %}
+            <tr>
+                <td>{{ s.name }}</td>
+                <td>{{ s.email }}</td>
+                <td>{{ s.instructor }}</td>
+                <td>{{ s.instrument }}</td>
+                <td>{{ s.status }}</td>
+                <td>{{ s.level }}</td>
+                <td>{{ s.balance }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    </div>
+
+    <!-- Jquery -->
+    <script>
+    $(document).ready(function () {
+        $("#MusicLesson").DataTable();
+    });
+    </script>
+
+{% endblock %}
